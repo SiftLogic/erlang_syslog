@@ -80,10 +80,10 @@ build_packet(Name, Msg, Opts) ->
 
     iolist_to_binary(Packet).
 
-send(Name, Msg) when is_list(Msg) ->
+send(Name, Msg) when is_list(Msg); is_binary(Msg) ->
     send(Name, Msg, []).
 
-send(Name, Msg, Opts) when is_list(Msg), is_list(Opts) ->
+send(Name, Msg, Opts) when is_list(Msg); is_binary(Msg), is_list(Opts) ->
     Address = get_addr(Name, Opts),
     Port = get_port(Name, Opts),
     Packet = build_packet(Name, Msg, Opts),
